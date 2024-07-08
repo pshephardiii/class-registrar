@@ -1,6 +1,6 @@
 from rich.console import Console
 import typer
-from server import reset, add_a_student
+from server import reset, add_a_student, add_a_course
 
 app = typer.Typer()
 console = Console()
@@ -12,9 +12,11 @@ def add_student(first_name: str, last_name: str, unix_id: str):
     add_a_student(first_name, last_name, unix_id)
     console.print("Adding a new student!")
 
+# If you want spaces, just use quotes when typing out row value in command line
 @app.command()
-def add_course():
-    console.print("Adding a new course...")
+def add_course(moniker: str, name: str, department: str):
+    add_a_course(moniker, name, department)
+    console.print("Adding a new course!")
 
 @app.command()
 def reset_database():
