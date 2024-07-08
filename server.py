@@ -33,7 +33,7 @@ get_db_connection = lambda autocommit=False: connect(
 def reset():
     with get_connection() as connection:
         with connection.cursor() as cursor:
-            with open('tables.sql', 'r') as f:
+            with open('ddl.sql', 'r') as f:
                 for result in cursor.execute(f.read(), multi=True):
                     pass
 
