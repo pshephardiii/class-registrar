@@ -3,9 +3,7 @@ from dotenv import load_dotenv
 from collections import namedtuple
 import os
 
-
 load_dotenv()
-
 
 def get_connection():
     connection = None
@@ -19,6 +17,7 @@ def get_connection():
         ) 
     except Error as e:
         print(f"Error '{e}' occured while attempting to connect to the database")
+
     return connection
 
 
@@ -31,6 +30,11 @@ get_db_connection = lambda autocommit=False: connect(
     autocommit = autocommit
 ) 
 
+def reset():
+    with get_connection() as connection:
+        with connection.cursor() as cursor:
+            with open('tables.sql', 'r') as f:
+                for result in cursor.execute(f.read(), multi=True):
+                    pass
 
-
-
+    connection.close()
