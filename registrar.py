@@ -1,15 +1,16 @@
 from rich.console import Console
 import typer
-from server import reset
-from server import get_connection
+from server import reset, add_a_student
 
 app = typer.Typer()
 console = Console()
 
 # for this to work, need to use zsh terminal with python3 server.py COMMAND NAME
+# to add student, type "python3 registrar.py add-student FIRST LAST UNIX-ID" where all caps should be replaced with values
 @app.command()
-def add_student():
-    console.print("Adding a new student...")
+def add_student(first_name: str, last_name: str, unix_id: str):
+    add_a_student(first_name, last_name, unix_id)
+    console.print("Adding a new student!")
 
 @app.command()
 def add_course():

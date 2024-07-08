@@ -38,3 +38,10 @@ def reset():
                     pass
 
     connection.close()
+
+def add_a_student(first_name, last_name, unix_id):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("INSERT INTO students (first_name, last_name, unix_id) VALUES (%s, %s, %s);",
+                (first_name, last_name, unix_id))
+            conn.commit()
